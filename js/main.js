@@ -4,6 +4,7 @@ const listaGastos = [];
 // Creo un monto que empieza en 0 y después va sumando para devolver el total
 let totalGastos = 0;
 const sumatoriaGastos = document.querySelector("#total-gastos");
+const mayorGasto = document.querySelector("#mayor-gasto");
 
 const botonSubmit = document.querySelector("#btn-submit");
 const agregarLocal = document.querySelector("#local");
@@ -27,13 +28,13 @@ crearLista.addEventListener("submit", (e) => {
     gasto.monto = parseInt(agregarMonto.value);
     apareceLista(gasto);
 
-    // crearLista.reset();
+    crearLista.reset();
     agregarLocal.focus();
 
     sumatoriaGastos.innerText = `Usted gasto en total: $${totalGastos}`;
-    console.log(listaGastos);
-    console.log(totalGastos);
 
+    const localMayorGasto = listaGastos.reduce((max, item) => (item.monto > max.monto ? item : max), listaGastos[0]);
+    mayorGasto.innerText = `Local con el mayor gasto este mes: ${localMayorGasto.local}`;
 })
 
 function apareceLista(objeto){
@@ -59,17 +60,6 @@ function apareceLista(objeto){
         tdMonto.id = `monto-${objeto.local}`;
         tdMonto.innerText = objeto.monto;
         crearGasto.append(tdMonto);
-
-        const tdEliminar = document.createElement("td");
-        tdEliminar.classList = "td-eliminar";
-        tdEliminar.innerText = "❌";
-        tdEliminar.addEventListener("click", ()=>{
-            crearGasto.remove();
-            totalGastos -= parseInt(tdMonto.innerText)
-            sumatoriaGastos.innerText = `Usted gasto en total: $${totalGastos}`;
-            
-        })
-        crearGasto.append(tdEliminar);
     
         tablaGastos.append(crearGasto);
     }
