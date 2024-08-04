@@ -58,6 +58,10 @@ body{
     font-size: 13px;
 }
 
+.div-form{
+    width: 100%;
+}
+
 .form-gastos{
     display: flex;
     flex-direction: column;
@@ -103,6 +107,12 @@ body{
     width: 100%;
 }
 
+.lista-gastos h2{
+    margin-top: 10px;
+    font-size: 17px;
+    text-align: left;
+}
+
 .tabla-gastos{
     border-collapse: collapse;
     width: 100%;
@@ -121,9 +131,9 @@ td, th {
     font-size: 15px;
     padding: 8px;
 }
- 
-tr:nth-child(even) {
-background-color: #dddddd;
+
+.td-eliminar{
+    border: none;
 }
 
 /* Footer */

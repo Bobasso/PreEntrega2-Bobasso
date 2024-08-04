@@ -16,17 +16,24 @@ const crearLista = document.querySelector("#crear-lista");
 crearLista.addEventListener("submit", (e) => {
     e.preventDefault();
 
+    if(totalGastos < 0){
+        alert("No podes tener gastos negativos!! Fijate si estas poniendo bien los números. Si te equivocaste podes refrescar la página y volver a ingresar los números.");
+    }
+
+    totalGastos += parseInt(agregarMonto.value); //! Voy sumando el monto del gasto a un total
+
     let gasto = {};
     gasto.local = agregarLocal.value;
     gasto.monto = parseInt(agregarMonto.value);
     apareceLista(gasto);
 
-    crearLista.reset();
+    // crearLista.reset();
     agregarLocal.focus();
 
-    totalGastos += parseInt(agregarMonto.value); //! Voy sumando el monto del gasto a un total
     sumatoriaGastos.innerText = `Usted gasto en total: $${totalGastos}`;
     console.log(listaGastos);
+    console.log(totalGastos);
+
 })
 
 function apareceLista(objeto){
@@ -44,6 +51,7 @@ function apareceLista(objeto){
         const crearGasto = document.createElement("tr");
 
         const tdLocal = document.createElement("td");
+        tdLocal.id = objeto.local;
         tdLocal.innerText = objeto.local;
         crearGasto.append(tdLocal);
     
@@ -51,6 +59,17 @@ function apareceLista(objeto){
         tdMonto.id = `monto-${objeto.local}`;
         tdMonto.innerText = objeto.monto;
         crearGasto.append(tdMonto);
+
+        const tdEliminar = document.createElement("td");
+        tdEliminar.classList = "td-eliminar";
+        tdEliminar.innerText = "❌";
+        tdEliminar.addEventListener("click", ()=>{
+            crearGasto.remove();
+            totalGastos -= parseInt(tdMonto.innerText)
+            sumatoriaGastos.innerText = `Usted gasto en total: $${totalGastos}`;
+            
+        })
+        crearGasto.append(tdEliminar);
     
         tablaGastos.append(crearGasto);
     }
