@@ -39,15 +39,21 @@ crearLista.addEventListener("submit", (e) => {
 
 function apareceLista(objeto){
     const listaLocal = listaGastos.map(item => item.local);
-    if(listaLocal.includes(objeto.local)){
-        const index = listaGastos.findIndex(item => item.local == objeto.local);
+    if(listaLocal.includes(objeto.local.toLowerCase())){
+        const index = listaGastos.findIndex(item => item.local == objeto.local.toLowerCase());
+        console.log(index);
         if (index !== -1) {
             const numFinal = listaGastos[index].monto += objeto.monto;
-            const cambiarNum = document.querySelector(`#monto-${objeto.local}`);
+            const cambiarNum = document.querySelector(`#monto-${objeto.local.toLowerCase()}`);
             cambiarNum.innerText = numFinal
         }
     }else{
-        listaGastos.push(objeto);
+
+        listaGastos.push({
+            local: objeto.local.toLowerCase(),
+            monto: objeto.monto
+        });
+        console.log(listaGastos);
 
         const crearGasto = document.createElement("tr");
 
