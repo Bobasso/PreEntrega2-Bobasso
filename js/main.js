@@ -50,7 +50,7 @@ function apareceLista(objeto){
     }else{
 
         listaGastos.push({
-            local: objeto.local.toLowerCase(),
+            local: objeto.local.toLowerCase(), // Agrego el Local en minus a la lista para poder comparar más fácil
             monto: objeto.monto
         });
         console.log(listaGastos);
