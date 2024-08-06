@@ -20,11 +20,11 @@ crearLista.addEventListener("submit", (e) => {
         alert("No podes tener gastos negativos!! Fijate si estas poniendo bien los números. Si te equivocaste podes refrescar la página y volver a ingresar los números.");
     }
 
-    totalGastos += parseInt(agregarMonto.value); //! Voy sumando el monto del gasto a un total
+    totalGastos += parseFloat(agregarMonto.value); //! Voy sumando el monto del gasto a un total
 
     let gasto = {};
     gasto.local = (agregarLocal.value).trim();
-    gasto.monto = parseInt(agregarMonto.value);
+    gasto.monto = parseFloat(agregarMonto.value);
     apareceLista(gasto);
 
     crearLista.reset();
