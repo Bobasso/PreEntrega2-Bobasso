@@ -45,7 +45,10 @@ function apareceLista(objeto){
         const index = listaGastos.findIndex(item => item.local == objeto.local.toLowerCase());
         if (index !== -1) {
             const numFinal = listaGastos[index].monto += objeto.monto;
-            const cambiarNum = document.querySelector(`#monto-${objeto.local.toLowerCase()}`);
+            console.log(numFinal);
+            const idMonto = objeto.local.replace(" ", "-"); // Borro los espacio para el id del monto del local para que no tire error el programa
+            const cambiarNum = document.querySelector(`#monto-${idMonto.toLowerCase()}`);
+            console.log(cambiarNum);
             cambiarNum.innerText = `$${numFinal.toString()}`;
         }
     }else{
@@ -63,7 +66,8 @@ function apareceLista(objeto){
         crearGasto.append(tdLocal);
     
         const tdMonto = document.createElement("td");
-        tdMonto.id = `monto-${objeto.local.toLowerCase()}`;
+        const idMonto = objeto.local.replace(" ", "-"); // Borro los espacio para el id del monto del local para que no tire error el programa
+        tdMonto.id = `monto-${idMonto.toLowerCase()}`;
         tdMonto.innerText = `$${objeto.monto}`;
         crearGasto.append(tdMonto);
 
