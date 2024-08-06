@@ -45,10 +45,8 @@ function apareceLista(objeto){
         const index = listaGastos.findIndex(item => item.local == objeto.local.toLowerCase());
         if (index !== -1) {
             const numFinal = listaGastos[index].monto += objeto.monto;
-            console.log(numFinal);
             const idMonto = objeto.local.replace(" ", "-"); // Borro los espacio para el id del monto del local para que no tire error el programa
             const cambiarNum = document.querySelector(`#monto-${idMonto.toLowerCase()}`);
-            console.log(cambiarNum);
             cambiarNum.innerText = `$${numFinal.toString()}`;
         }
     }else{
