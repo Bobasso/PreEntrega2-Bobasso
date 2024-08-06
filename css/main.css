@@ -86,6 +86,10 @@ body{
     color: rgb(182, 182, 182);
 }
 
+.btn-container{
+    display: flex;
+}
+
 .btn-submit{
     border: solid rgb(0, 132, 255) 1px;
     border-radius: 5px;
@@ -100,6 +104,24 @@ body{
 .btn-submit:hover{
     background-color: rgb(0, 102, 255);
     border: solid rgb(0, 102, 255) 1px;
+    cursor: pointer;
+}
+
+.btn-limpiar{
+    border: solid rgb(214, 98, 3) 1px;
+    border-radius: 5px;
+    background-color: rgb(214, 98, 3);
+    font-size: 13px;
+    font-weight: bold;
+    padding: 5px;
+    width: 35%;
+    margin: 0 auto;
+}
+
+.btn-limpiar:hover{
+    background-color: rgb(214, 68, 3);
+    border: solid rgb(214, 68, 3) 1px;
+    cursor: pointer;
 }
 
 .lista-gastos{
@@ -134,6 +156,17 @@ td, th {
 
 tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+.td-eliminar{
+    border: none;
+    background-color: whitesmoke;
+    padding: 0;
+    width: 10px;
+}
+
+.td-eliminar:hover{
+    cursor: pointer;
 }
 
 /* Footer */

@@ -19,6 +19,7 @@
             <h2>Agregue los gastos que tuvo durante todo el mes y vea cuánto gastó en total</h2>
             <h3>1️⃣ Si coloca gastos de un mismo local, estos se sumarán para dar el total de ese local. No se agregarán múltiples gastos con el mismo nombre del local.</h3>
             <h3>2️⃣ Si ingresaste mal algún número, puedes poner un signo negativo en el monto gastado para restarlo y así corregir las cuentas.</h3>
+            <h3>3️⃣ Cualquier cosa podes tocar el símbolo "❌" para borrar del todo el gasto e ingresar todo de nuevo</h3>
 
             <div class="div-form">
                 <form action="" id="crear-lista" class="form-gastos">
@@ -27,18 +28,25 @@
     
                     <label for="monto">Cuanto gastaste? (En Pesos, no hace falta poner signo)</label>
                     <input type="number" placeholder="1000" id="monto" name="monto" required>
-    
-                    <button class="btn-submit" id="btn-submit" type="submit">Sumar Gasto</button>
+                    
+                    <div class="btn-container">
+                        <button class="btn-submit" id="btn-submit" type="submit">Sumar Gasto</button>
+                        <button class="btn-limpiar" id="btn-limpiar" type="button">Limpiar Lista</button>
+                    </div>
                 </form>
             </div>
             
             <div class="lista-gastos">
                 <table class="tabla-gastos" id="tabla-gasto">
-                    <tr>
-                        <th>Local</th>
-                        <th>Gasto</th>
-                    </tr>
-                    <!-- Acá se agrega la etiqueta td con el local y gasto -->
+                    <thead>
+                        <tr>
+                            <th>Local</th>
+                            <th>Gasto</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contenido-tabla">
+                        <!-- Acá se agrega la etiqueta td con el local y gasto -->
+                    </tbody>
                 </table>
                 <h2 id="total-gastos"><!-- Acá un texto que indica el total de lo gastado--></h2>
                 <h2 id="mayor-gasto"><!-- Acá un texto que indica el local en el que más se gasto --></h2>
