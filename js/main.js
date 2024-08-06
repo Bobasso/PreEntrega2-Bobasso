@@ -5,6 +5,7 @@ const listaGastos = [];
 let totalGastos = 0;
 const sumatoriaGastos = document.querySelector("#total-gastos");
 const mayorGasto = document.querySelector("#mayor-gasto");
+const menorGasto = document.querySelector("#menor-gasto");
 
 const botonSubmit = document.querySelector("#btn-submit");
 const agregarLocal = document.querySelector("#local");
@@ -24,7 +25,7 @@ crearLista.addEventListener("submit", (e) => {
     totalGastos += parseInt(agregarMonto.value); //! Voy sumando el monto del gasto a un total
 
     let gasto = {};
-    gasto.local = agregarLocal.value;
+    gasto.local = (agregarLocal.value).trim();
     gasto.monto = parseInt(agregarMonto.value);
     apareceLista(gasto);
 
@@ -34,18 +35,20 @@ crearLista.addEventListener("submit", (e) => {
     sumatoriaGastos.innerText = `Usted gasto en total: $${totalGastos}`;
 
     const localMayorGasto = listaGastos.reduce((max, item) => (item.monto > max.monto ? item : max), listaGastos[0]);
-    mayorGasto.innerText = `Local con el mayor gasto este mes: ${localMayorGasto.local}`;
+    mayorGasto.innerText = `Local con el mayor gasto este mes: ` + localMayorGasto.local[0].toUpperCase() + localMayorGasto.local.substring(1);
+
+    const localMenorGasto = listaGastos.reduce((min, item) => (item.monto < min.monto ? item : min), listaGastos[0]);
+    menorGasto.innerText = `Local con el menor gasto este mes: ` + localMenorGasto.local[0].toUpperCase() + localMenorGasto.local.substring(1);
 })
 
 function apareceLista(objeto){
     const listaLocal = listaGastos.map(item => item.local);
     if(listaLocal.includes(objeto.local.toLowerCase())){
         const index = listaGastos.findIndex(item => item.local == objeto.local.toLowerCase());
-        console.log(index);
         if (index !== -1) {
             const numFinal = listaGastos[index].monto += objeto.monto;
             const cambiarNum = document.querySelector(`#monto-${objeto.local.toLowerCase()}`);
-            cambiarNum.innerText = numFinal
+            cambiarNum.innerText = `$${numFinal.toString()}`;
         }
     }else{
 
@@ -53,18 +56,17 @@ function apareceLista(objeto){
             local: objeto.local.toLowerCase(), //! Agrego el Local en minus a la lista para poder comparar más fácil
             monto: objeto.monto
         });
-        console.log(listaGastos);
 
         const crearGasto = document.createElement("tr");
 
         const tdLocal = document.createElement("td");
         tdLocal.id = objeto.local;
-        tdLocal.innerText = objeto.local;
+        tdLocal.innerText = (objeto.local[0].toUpperCase() + objeto.local.substring(1).toLowerCase()).trim();
         crearGasto.append(tdLocal);
     
         const tdMonto = document.createElement("td");
-        tdMonto.id = `monto-${objeto.local}`;
-        tdMonto.innerText = objeto.monto;
+        tdMonto.id = `monto-${objeto.local.toLowerCase()}`;
+        tdMonto.innerText = `$${objeto.monto}`;
         crearGasto.append(tdMonto);
     
         tablaGastos.append(crearGasto);

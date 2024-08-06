@@ -132,8 +132,8 @@ td, th {
     padding: 8px;
 }
 
-.td-eliminar{
-    border: none;
+tr:nth-child(even) {
+    background-color: #dddddd;
 }
 
 /* Footer */
