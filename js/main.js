@@ -1,6 +1,6 @@
-const listaGastos = []; // Creo lista vacia para sumar el objeto que sería gasto
+const listaGastos = []; //! Creo lista vacia para sumar el objeto que sería gasto
 
-let totalGastos = 0; // Creo un monto que empieza en 0 y después va sumando para devolver el total
+let totalGastos = 0; //! Creo un monto que empieza en 0 y después va sumando para devolver el total
 const sumatoriaGastos = document.querySelector("#total-gastos");
 const mayorGasto = document.querySelector("#mayor-gasto");
 const menorGasto = document.querySelector("#menor-gasto");
