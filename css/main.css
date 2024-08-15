@@ -42,6 +42,10 @@ body{
     align-items: center;
 }
 
+.desaparecer{
+    display: none;
+}
+
 .container h2, h3{
     text-align: center;
     margin-bottom: 5px;
@@ -97,7 +101,7 @@ body{
     font-size: 13px;
     font-weight: bold;
     padding: 5px;
-    width: 35%;
+    width: 30%;
     margin: 0 auto;
 }
 
@@ -114,13 +118,47 @@ body{
     font-size: 13px;
     font-weight: bold;
     padding: 5px;
-    width: 35%;
+    width: 30%;
     margin: 0 auto;
 }
 
 .btn-limpiar:hover{
     background-color: rgb(214, 68, 3);
     border: solid rgb(214, 68, 3) 1px;
+    cursor: pointer;
+}
+
+.btn-cerrar{
+    border: solid rgb(138, 119, 37) 1px;
+    border-radius: 5px;
+    background-color: rgb(138, 119, 37);
+    font-size: 13px;
+    font-weight: bold;
+    padding: 5px;
+    width: 30%;
+    margin: 0 auto;
+}
+
+.btn-cerrar:hover{
+    background-color: rgb(138, 89, 37);
+    border: solid rgb(138, 89, 37) 1px;
+    cursor: pointer;
+}
+
+.btn-ingresar{
+    border: solid rgb(0, 132, 255) 1px;
+    border-radius: 5px;
+    background-color: rgb(0, 132, 255);
+    font-size: 13px;
+    font-weight: bold;
+    padding: 5px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.btn-submit:hover{
+    background-color: rgb(0, 102, 255);
+    border: solid rgb(0, 102, 255) 1px;
     cursor: pointer;
 }
 

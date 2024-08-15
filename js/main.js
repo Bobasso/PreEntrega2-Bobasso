@@ -1,3 +1,42 @@
+const containerLogin = document.querySelector("#container-login"); // Id del primer Div
+const containerTabla = document.querySelector("#container-tabla"); // Id del segundo Div
+
+const txtHola = document.querySelector("#txt-hola"); // Agrego texto a un h2 donde saluda al usuario
+
+// Chequeo que si existe un nombre guardado en el Local Storage
+const personaLocalStorage = localStorage.getItem("persona");
+const personaObjeto = JSON.parse(personaLocalStorage);
+
+if(personaLocalStorage !== null){
+    containerLogin.classList.add("desaparecer");
+    containerTabla.classList.remove("desaparecer");
+
+    txtHola.innerText = `Bienvenido ${personaObjeto.nombre} ${personaObjeto.apellido}. Agregue los gastos que tuvo durante todo el mes y vea cuánto gastó en total`;
+}
+
+// Pedir nombre y guardar
+const pedirNombre = document.querySelector("#pedir-nombre"); // Id del formulario
+const nombrePersona = document.querySelector("#nombre"); // Id input donde ingresa el nombre
+const apellidoPersona = document.querySelector("#apellido"); // Id input donde ingresa el apellido
+
+pedirNombre.addEventListener("submit", (e) =>{
+    e.preventDefault();
+
+    let persona = {};
+    persona.nombre = (nombrePersona.value).trim();
+    persona.apellido = (apellidoPersona.value).trim();
+    localStorage.setItem("persona", JSON.stringify(persona));
+
+    containerLogin.classList.add("desaparecer");
+    containerTabla.classList.remove("desaparecer");
+
+    txtHola.innerText = `Bienvenido ${persona.nombre} ${persona.apellido}. Agregue los gastos que tuvo durante todo el mes y vea cuánto gastó en total`;
+
+    pedirNombre.reset();
+});
+
+
+// Tabla de gastos
 const listaGastos = []; //! Creo lista vacia para sumar el objeto que sería gasto
 
 let totalGastos = 0; //! Creo un monto que empieza en 0 y después va sumando para devolver el total
@@ -16,9 +55,8 @@ const agregarMonto = document.querySelector("#monto"); // Id input donde ingresa
 crearLista.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    if(totalGastos < 0){
-        alert("No podes tener gastos negativos!! Fijate si estas poniendo bien los números. Si te equivocaste podes refrescar la página y volver a ingresar los números.");
-    }
+    // Uso Operador Avanzado AND
+    totalGastos < 0 && alert("No podes tener gastos negativos!! Fijate si estas poniendo bien los números.");
 
     totalGastos += parseFloat(agregarMonto.value); //! Voy sumando el monto del gasto a un total
 
@@ -26,6 +64,7 @@ crearLista.addEventListener("submit", (e) => {
     gasto.local = (agregarLocal.value).trim();
     gasto.monto = parseFloat(agregarMonto.value);
     apareceLista(gasto);
+    localStorage.setItem("gastos", JSON.stringify(listaGastos));
 
     crearLista.reset();
     agregarLocal.focus();
@@ -107,4 +146,15 @@ limpiarLista.addEventListener("click", ()=>{
     sumatoriaGastos.innerText = ``; // 
     mayorGasto.innerText = ``;      // -> Limpio los textos de abajo de la tabla
     menorGasto.innerText = ``;      //
+});
+
+// Función para cerrar sesión
+const cerrarSesion = document.querySelector("#btn-cerrar");
+
+cerrarSesion.addEventListener("click", ()=>{
+    localStorage.removeItem("persona");
+    localStorage.removeItem("gastos");
+
+    containerLogin.classList.remove("desaparecer");
+    containerTabla.classList.add("desaparecer");
 });

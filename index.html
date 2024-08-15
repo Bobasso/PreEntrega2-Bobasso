@@ -15,8 +15,20 @@
     </header>
     
     <main>
-        <div class="container">
-            <h2>Agregue los gastos que tuvo durante todo el mes y vea cuánto gastó en total</h2>
+        <div class="container" id="container-login">
+            <form action="" id="pedir-nombre" class="form-gastos">
+                <label for="nombre">Ingresar su nombre:</label>
+                <input type="text" placeholder="Nicolás, Juan, etc..." id="nombre" name="nombre" required>
+
+                <label for="apellido">Ingresar su apellido:</label>
+                <input type="text" placeholder="Gutierrez, Fernandez, etc..." id="apellido" name="apellido" required>
+
+                <button class="btn-ingresar" id="btn-submit-nombre" type="submit">Ingresar</button>
+            </form>
+        </div>
+
+        <div class="desaparecer container" id="container-tabla">
+            <h2 id="txt-hola"></h2>
             <h3>1️⃣ Si coloca gastos de un mismo local, estos se sumarán para dar el total de ese local. No se agregarán múltiples gastos con el mismo nombre del local.</h3>
             <h3>2️⃣ Si ingresaste mal algún número, puedes poner un signo negativo en el monto gastado para restarlo y así corregir las cuentas.</h3>
             <h3>3️⃣ Cualquier cosa podes tocar el símbolo "❌" para borrar del todo el gasto e ingresar todo de nuevo</h3>
@@ -32,6 +44,7 @@
                     <div class="btn-container">
                         <button class="btn-submit" id="btn-submit" type="submit">Sumar Gasto</button>
                         <button class="btn-limpiar" id="btn-limpiar" type="button">Limpiar Lista</button>
+                        <button class="btn-cerrar" id="btn-cerrar" type="button">Cerrar Sesión</button>
                     </div>
                 </form>
             </div>
