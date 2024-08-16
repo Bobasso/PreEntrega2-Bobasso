@@ -64,6 +64,7 @@ crearLista.addEventListener("submit", (e) => {
     gasto.local = (agregarLocal.value).trim();
     gasto.monto = parseFloat(agregarMonto.value);
     apareceLista(gasto);
+
     localStorage.setItem("gastos", JSON.stringify(listaGastos));
 
     crearLista.reset();
@@ -76,6 +77,18 @@ crearLista.addEventListener("submit", (e) => {
 
     const localMenorGasto = listaGastos.reduce((min, item) => (item.monto < min.monto ? item : min), listaGastos[0]);
     menorGasto.innerText = `Local con el menor gasto este mes: ` + localMenorGasto.local[0].toUpperCase() + localMenorGasto.local.substring(1);
+
+    Toastify({
+        text: "Gasto agregado",
+        style: {
+            background: "green",
+            color: "white",
+        },
+        gravity: "top",
+        position: "center",
+        duration: 1000,
+        stopOnFocus: false
+    }).showToast();
 })
 
 function apareceLista(objeto){
@@ -130,6 +143,18 @@ function apareceLista(objeto){
                     menorGasto.innerText = `Local con el mayor gasto este mes: `;
                 }
             }
+
+            Toastify({
+                text: "Gasto eliminado",
+                style: {
+                    background: "#A62B1F",
+                    color: "white",
+                },
+                gravity: "top",
+                position: "center",
+                duration: 1000,
+                stopOnFocus: false
+            }).showToast();
         });
 
         crearGasto.append(tdEliminar);
@@ -139,13 +164,26 @@ function apareceLista(objeto){
 
 const limpiarLista = document.querySelector("#btn-limpiar");
 limpiarLista.addEventListener("click", ()=>{
-    listaGastos.splice(0, listaGastos.length); // Vacio la lista para que pueda repetir nombres sin problema
-    tablaGastos.querySelector("tbody").innerHTML = ""; // Borro el contenido del html la tabla menos los títulos.
-    
-    totalGastos = 0; // Reset del total
-    sumatoriaGastos.innerText = ``; // 
-    mayorGasto.innerText = ``;      // -> Limpio los textos de abajo de la tabla
-    menorGasto.innerText = ``;      //
+
+    Swal.fire({
+        icon: "question",
+        title: `Estas por limpiar tu lista de gastos, estas seguro?`,
+        showConfirmButton: true,
+        showDenyButton: true,
+        confirmButtonText: "Sí, estoy seguro",
+        denyButtonText: "No quiero",
+    }).then((result) => {
+        if(result.isConfirmed){
+            listaGastos.splice(0, listaGastos.length); // Vacio la lista para que pueda repetir nombres sin problema
+            tablaGastos.querySelector("tbody").innerHTML = ""; // Borro el contenido del html la tabla menos los títulos.
+            
+            totalGastos = 0; // Reset del total
+            sumatoriaGastos.innerText = ``; // 
+            mayorGasto.innerText = ``;      // -> Limpio los textos de abajo de la tabla
+            menorGasto.innerText = ``;      //
+        }
+    });
+
 });
 
 // Función para cerrar sesión
@@ -157,4 +195,13 @@ cerrarSesion.addEventListener("click", ()=>{
 
     containerLogin.classList.remove("desaparecer");
     containerTabla.classList.add("desaparecer");
+
+    Swal.fire({
+        icon: "success",
+        title: "Cerraste sesión con éxito!",
+        showConfirmButton: false,
+        showCloseButton: true,
+        timer: 3000
+    });
+
 });
