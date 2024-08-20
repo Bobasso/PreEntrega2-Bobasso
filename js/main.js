@@ -193,6 +193,14 @@ cerrarSesion.addEventListener("click", ()=>{
     localStorage.removeItem("persona");
     localStorage.removeItem("gastos");
 
+    listaGastos.splice(0, listaGastos.length); // Vacio la lista para que pueda repetir nombres sin problema
+    tablaGastos.querySelector("tbody").innerHTML = ""; // Borro el contenido del html la tabla menos los títulos.
+    
+    totalGastos = 0; // Reset del total
+    sumatoriaGastos.innerText = ``; // 
+    mayorGasto.innerText = ``;      // -> Limpio los textos de abajo de la tabla
+    menorGasto.innerText = ``;      //
+
     containerLogin.classList.remove("desaparecer");
     containerTabla.classList.add("desaparecer");
 
@@ -205,3 +213,5 @@ cerrarSesion.addEventListener("click", ()=>{
     });
 
 });
+
+// Chequeo si existe una lista de gastos y armo la tabla en base a eso
