@@ -131,6 +131,7 @@ function apareceLista(objeto){
                 totalGastos -= listaGastos[index].monto;
                 sumatoriaGastos.innerText = `Usted gasto en total: $${totalGastos}`;
                 listaGastos.splice(index, 1);
+                localStorage.setItem("gastos", JSON.stringify(listaGastos));
 
                 if(listaGastos.length > 0){
                     const localMayorGasto = listaGastos.reduce((max, item) => (item.monto > max.monto ? item : max), listaGastos[0]);
@@ -174,6 +175,8 @@ limpiarLista.addEventListener("click", ()=>{
         denyButtonText: "No quiero",
     }).then((result) => {
         if(result.isConfirmed){
+            localStorage.removeItem("gastos");
+
             listaGastos.splice(0, listaGastos.length); // Vacio la lista para que pueda repetir nombres sin problema
             tablaGastos.querySelector("tbody").innerHTML = ""; // Borro el contenido del html la tabla menos los títulos.
             
@@ -214,4 +217,26 @@ cerrarSesion.addEventListener("click", ()=>{
 
 });
 
-// Chequeo si existe una lista de gastos y armo la tabla en base a eso
+// Función que para cuando recargue la página o salga, no se vaya los gastos que hizo a menos que cierre sesión o limpie la lista
+function mostrarTabla(){
+    let lista = JSON.parse(localStorage.getItem('gastos')) || [];
+
+    lista.forEach(function(item){
+        apareceLista(item);
+        totalGastos += parseFloat(item.monto);
+    });
+
+    if(totalGastos > 0){
+        sumatoriaGastos.innerText = `Usted gasto en total: $${totalGastos}`;
+    };
+    
+    if(lista.length > 0){
+        const localMayorGasto = listaGastos.reduce((max, item) => (item.monto > max.monto ? item : max), listaGastos[0]);
+        mayorGasto.innerText = `Local con el mayor gasto este mes: ` + localMayorGasto.local[0].toUpperCase() + localMayorGasto.local.substring(1);
+
+        const localMenorGasto = listaGastos.reduce((min, item) => (item.monto < min.monto ? item : min), listaGastos[0]);
+        menorGasto.innerText = `Local con el menor gasto este mes: ` + localMenorGasto.local[0].toUpperCase() + localMenorGasto.local.substring(1);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", mostrarTabla);
